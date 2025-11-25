@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.verisure.it)",
+      "WebFetch(domain:antifurto.verisure.it)",
+      "mcp__ide__getDiagnostics",
+      "Bash(dir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
