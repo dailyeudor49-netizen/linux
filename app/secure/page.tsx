@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, CheckCircle, Lock, Smartphone, Clock, Star, Zap, Award, Phone, Camera, Bell, Users, ArrowRight, ChevronDown, Download, Settings, Radar, Battery, Circle, Wifi, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Shield, CheckCircle, Lock, Smartphone, Clock, Star, Zap, Award, Phone, Camera, Bell, Users, ArrowRight, ChevronDown, Download, Settings, Radar, Battery, Circle, Wifi, ChevronLeft, ChevronRight, Quote, Plus } from 'lucide-react';
 import Image from 'next/image';
 
 const testimonials = [
@@ -365,6 +365,23 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
+  const [showAppMenu, setShowAppMenu] = useState(false);
+  const [showTelecamere, setShowTelecamere] = useState(false);
+  const [showSmartlock, setShowSmartlock] = useState(false);
+  const [smartlockOpen, setSmartlockOpen] = useState(false);
+  const [showVideoRegistrati, setShowVideoRegistrati] = useState(false);
+  const [showImpostazioni, setShowImpostazioni] = useState(false);
+  const [settingsToggles, setSettingsToggles] = useState({
+    notifiche: true,
+    programmazione: true,
+    vacanza: false,
+  });
+  const [showIntervieni, setShowIntervieni] = useState(false);
+  const [showCalling, setShowCalling] = useState(false);
+  const [showAlarmNotification, setShowAlarmNotification] = useState(false);
+  const [alarmActive, setAlarmActive] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage.getItem('lead_submitted')) {
@@ -379,6 +396,38 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
     window.addEventListener('openOrderForm', handleOpenForm);
     return () => window.removeEventListener('openOrderForm', handleOpenForm);
   }, []);
+
+  useEffect(() => {
+    if (showDemo || showIntervieni || showAppMenu || showTelecamere) {
+      const timer = setInterval(() => {
+        setCurrentTime(new Date());
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [showDemo, showIntervieni, showAppMenu, showTelecamere]);
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('it-IT', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('it-IT', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  };
+
+  const cameras = [
+    { id: 1, name: 'CAM 01 - Ingresso', status: 'secure', image: 'https://media-cdn.tripadvisor.com/media/photo-s/08/b8/33/89/la-casa-del-borgo.jpg' },
+    { id: 2, name: 'CAM 02 - Sala', status: 'alert', image: 'https://www.sectoralarm.it/hs-fs/hubfs/SectorAlarm_December2024/Images/intelligence-and-protection-in-one-glance.webp?width=1157&height=1019&name=intelligence-and-protection-in-one-glance.webp' },
+    { id: 3, name: 'CAM 03 - Garage', status: 'secure', image: 'https://preview.redd.it/what-camera-to-install-in-garage-v0-qm5b9z7mkehe1.png?format=png&auto=webp&s=82ba2f9a2fa8635254c09a2338a134b37fc3098e' },
+    { id: 4, name: 'CAM 04 - Camera da Letto', status: 'secure', image: 'https://magazine.bimbostore.com/app/uploads/2023/03/Temperatura-della-camera-del-neonato.jpg' },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -423,21 +472,581 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
     >
       {/* Immagine sempre in alto */}
       <div className="relative">
-        <Image
-          src="/images/secure/princ.png"
-          alt="Sistema di sicurezza"
-          width={800}
-          height={450}
-          quality={100}
-          priority
-          className="w-full h-auto object-contain"
-        />
+        <AnimatePresence mode="wait">
+          {showAppMenu ? (
+            <motion.div
+              key="appmenu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gradient-to-b from-blue-600 to-blue-700 rounded-t-2xl overflow-hidden"
+            >
+              {/* Header app */}
+              <div className="p-4 border-b border-blue-500">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Shield className="w-6 h-6 text-white" />
+                    <span className="text-white font-bold text-lg">BeSecure Pro</span>
+                  </div>
+                  <div className="text-right text-xs text-blue-100">
+                    <div>{formatDate(currentTime)}</div>
+                    <div>{formatTime(currentTime)}</div>
+                  </div>
+                </div>
+              </div>
 
-        {isHero && (
-          <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
-            Offerta fino al 23/12/2025
-          </div>
-        )}
+              {/* Status sistema */}
+              <div className="p-4">
+                <div className="bg-white/20 border border-white/30 rounded-xl p-3 flex items-center gap-3 mb-4">
+                  <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                  <span className="text-white font-semibold">Sistema Attivo - Casa Protetta</span>
+                </div>
+
+                {/* Menu opzioni */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => {
+                      setShowAppMenu(false);
+                      setShowTelecamere(true);
+                    }}
+                    className="bg-white hover:bg-blue-50 rounded-xl p-4 flex flex-col items-center gap-2 transition-all cursor-pointer relative shadow-lg"
+                  >
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Camera className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-blue-900 font-semibold text-sm">Telecamere</span>
+                    <span className="text-blue-600 text-xs">4 attive</span>
+                    <span className="text-red-500 text-[10px] font-semibold bg-red-50 border border-red-200 px-2 py-0.5 rounded-full animate-pulse">Movimento rilevato</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowAppMenu(false);
+                      setShowSmartlock(true);
+                    }}
+                    className="bg-white hover:bg-blue-50 rounded-xl p-4 flex flex-col items-center gap-2 transition-all cursor-pointer shadow-lg"
+                  >
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Lock className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-blue-900 font-semibold text-sm">Smartlock</span>
+                    <span className={`text-xs ${smartlockOpen ? 'text-red-500' : 'text-emerald-500'}`}>{smartlockOpen ? 'Aperto' : 'Chiuso'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowAppMenu(false);
+                      setShowVideoRegistrati(true);
+                    }}
+                    className="bg-white hover:bg-blue-50 rounded-xl p-4 flex flex-col items-center gap-2 transition-all cursor-pointer shadow-lg"
+                  >
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <span className="text-blue-900 font-semibold text-sm">Video Registrati</span>
+                    <span className="text-blue-600 text-xs">4 video</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowAppMenu(false);
+                      setShowImpostazioni(true);
+                    }}
+                    className="bg-white hover:bg-blue-50 rounded-xl p-4 flex flex-col items-center gap-2 transition-all cursor-pointer shadow-lg"
+                  >
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Settings className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-blue-900 font-semibold text-sm">Impostazioni</span>
+                    <span className="text-blue-600 text-xs">Configura</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Pulsante chiudi */}
+              <div className="p-4 pt-0">
+                <button
+                  onClick={() => setShowAppMenu(false)}
+                  className="w-full px-4 py-2 bg-white/20 text-white font-semibold rounded-xl hover:bg-white/30 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Chiudi App
+                </button>
+              </div>
+            </motion.div>
+          ) : showSmartlock ? (
+            <motion.div
+              key="smartlock"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+            >
+              {/* Header */}
+              <div className="p-4 border-b border-blue-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-6 h-6 text-blue-400" />
+                    <span className="text-white font-bold text-lg">Smartlock</span>
+                  </div>
+                  <div className="text-right text-xs text-blue-300">
+                    <div>{formatDate(currentTime)}</div>
+                    <div>{formatTime(currentTime)}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contenuto */}
+              <div className="p-6 flex flex-col items-center">
+                <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-4 ${smartlockOpen ? 'bg-red-500/20 border-2 border-red-500' : 'bg-emerald-500/20 border-2 border-emerald-500'}`}>
+                  <Lock className={`w-12 h-12 ${smartlockOpen ? 'text-red-400' : 'text-emerald-400'}`} />
+                </div>
+
+                <h3 className="text-white text-xl font-bold mb-2">Porta di Casa</h3>
+                <p className={`text-lg font-semibold mb-6 ${smartlockOpen ? 'text-red-400' : 'text-emerald-400'}`}>
+                  {smartlockOpen ? 'Aperta' : 'Chiusa'}
+                </p>
+
+                <button
+                  onClick={() => setSmartlockOpen(!smartlockOpen)}
+                  className={`px-8 py-3 rounded-xl font-bold text-white transition-all cursor-pointer ${smartlockOpen ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'}`}
+                >
+                  {smartlockOpen ? 'Chiudi Porta' : 'Apri Porta'}
+                </button>
+              </div>
+
+              {/* Pulsante torna */}
+              <div className="p-4 pt-0">
+                <button
+                  onClick={() => {
+                    setShowSmartlock(false);
+                    setShowAppMenu(true);
+                  }}
+                  className="w-full px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Torna al Menu
+                </button>
+              </div>
+            </motion.div>
+          ) : showVideoRegistrati ? (
+            <motion.div
+              key="videoregistrati"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+            >
+              {/* Header */}
+              <div className="p-4 border-b border-blue-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-white font-bold text-lg">Video Registrati</span>
+                  </div>
+                  <div className="text-right text-xs text-blue-300">
+                    <div>{formatDate(currentTime)}</div>
+                    <div>{formatTime(currentTime)}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Grid video */}
+              <div className="p-4">
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { cam: 'CAM 01', time: '14:32', image: cameras[0].image },
+                    { cam: 'CAM 02', time: '12:15', image: cameras[1].image },
+                    { cam: 'CAM 03', time: '09:45', image: cameras[2].image },
+                    { cam: 'CAM 04', time: '08:20', image: cameras[3].image },
+                  ].map((video, i) => (
+                    <div key={i} className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 cursor-pointer group">
+                      <Image
+                        src={video.image}
+                        alt={video.cam}
+                        fill
+                        className="object-cover brightness-75 group-hover:brightness-100 transition-all"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-10 h-10 bg-white/80 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <svg className="w-5 h-5 text-blue-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center">
+                        <span className="text-white text-xs font-semibold bg-black/50 px-2 py-0.5 rounded">{video.cam}</span>
+                        <span className="text-white text-xs bg-black/50 px-2 py-0.5 rounded">{video.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pulsante torna */}
+              <div className="p-4 pt-0">
+                <button
+                  onClick={() => {
+                    setShowVideoRegistrati(false);
+                    setShowAppMenu(true);
+                  }}
+                  className="w-full px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Torna al Menu
+                </button>
+              </div>
+            </motion.div>
+          ) : showImpostazioni ? (
+            <motion.div
+              key="impostazioni"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+            >
+              {/* Header */}
+              <div className="p-4 border-b border-blue-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Settings className="w-6 h-6 text-blue-400" />
+                    <span className="text-white font-bold text-lg">Impostazioni</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Opzioni */}
+              <div className="p-4 space-y-3 max-h-[300px] overflow-y-auto">
+                {[
+                  { icon: <Bell className="w-5 h-5" />, title: 'Notifiche', desc: 'Gestisci avvisi e suoni', toggle: true, toggleKey: 'notifiche' as const },
+                  { icon: <Camera className="w-5 h-5" />, title: 'Qualità Video', desc: 'HD 1080p', toggle: false },
+                  { icon: <Wifi className="w-5 h-5" />, title: 'Connessione', desc: 'WiFi: Casa_5G', toggle: false },
+                  { icon: <Phone className="w-5 h-5" />, title: 'Numeri Emergenza', desc: '112, +39 333...', toggle: false },
+                  { icon: <Users className="w-5 h-5" />, title: 'Utenti Autorizzati', desc: '3 membri famiglia', toggle: false },
+                  { icon: <Clock className="w-5 h-5" />, title: 'Programmazione', desc: 'Attivo 22:00 - 07:00', toggle: true, toggleKey: 'programmazione' as const },
+                  { icon: <Shield className="w-5 h-5" />, title: 'Modalità Vacanza', desc: 'Protezione extra', toggle: true, toggleKey: 'vacanza' as const },
+                  { icon: <Radar className="w-5 h-5" />, title: 'Sensibilità Sensori', desc: 'Media', toggle: false },
+                  { icon: <Plus className="w-5 h-5" />, title: 'Nuovo Dispositivo', desc: 'Configura sensore/telecamera', toggle: false },
+                  { icon: <Settings className="w-5 h-5" />, title: 'Impostazioni Avanzate', desc: 'Configurazione sistema', toggle: false },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center justify-between bg-blue-800/30 rounded-xl p-3 border border-blue-700/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-600/50 rounded-lg flex items-center justify-center text-blue-300">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm">{item.title}</p>
+                        <p className="text-blue-300 text-xs">{item.desc}</p>
+                      </div>
+                    </div>
+                    {item.toggle && item.toggleKey ? (
+                      <div
+                        onClick={() => setSettingsToggles(prev => ({ ...prev, [item.toggleKey!]: !prev[item.toggleKey!] }))}
+                        className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors ${settingsToggles[item.toggleKey] ? 'bg-emerald-500' : 'bg-gray-600'}`}
+                      >
+                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${settingsToggles[item.toggleKey] ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                      </div>
+                    ) : !item.toggle ? (
+                      <ChevronRight className="w-5 h-5 text-blue-400" />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+
+              {/* Pulsante torna */}
+              <div className="p-4">
+                <button
+                  onClick={() => {
+                    setShowImpostazioni(false);
+                    setShowAppMenu(true);
+                  }}
+                  className="w-full px-4 py-2 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Torna al Menu
+                </button>
+              </div>
+            </motion.div>
+          ) : showTelecamere ? (
+            <motion.div
+              key="telecamere"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gray-900 rounded-t-2xl overflow-hidden"
+            >
+              <div className="aspect-[4/3] grid grid-cols-2 grid-rows-2 gap-0.5 p-0.5 bg-gray-800">
+                {cameras.map((camera) => (
+                  <div key={camera.id} className="relative overflow-hidden">
+                    <Image
+                      src={camera.image}
+                      alt={camera.name}
+                      fill
+                      className={`object-cover ${camera.status === 'alert' ? 'brightness-110' : 'brightness-90'}`}
+                    />
+                    {/* Overlay scuro per effetto telecamera */}
+                    <div className="absolute inset-0 bg-black/30"></div>
+
+                    {/* Scanline effect */}
+                    <div className="absolute inset-0 pointer-events-none opacity-20 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.3)_2px,rgba(0,0,0,0.3)_4px)]"></div>
+
+                    {/* Header con data/ora e nome camera */}
+                    <div className="absolute top-0 left-0 right-0 p-1.5 md:p-2 bg-gradient-to-b from-black/70 to-transparent">
+                      <div className="flex justify-between items-start text-white text-[10px] md:text-xs font-mono">
+                        <div className="bg-black/50 px-1.5 py-0.5 rounded">
+                          <div className="text-[8px] md:text-xs">{camera.name}</div>
+                          <div className="flex items-center gap-1 text-red-500 text-[8px] md:text-xs mt-0.5">
+                            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full animate-pulse"></span>
+                            REC
+                          </div>
+                        </div>
+                        <div className="text-right bg-black/50 px-1.5 py-0.5 rounded">
+                          <div className="text-[8px] md:text-xs">{formatDate(currentTime)}</div>
+                          <div className="text-emerald-400 text-[8px] md:text-xs">{formatTime(currentTime)}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Status badge */}
+                    <div className="absolute bottom-1.5 md:bottom-2 left-1.5 md:left-2 right-1.5 md:right-2">
+                      {camera.status === 'secure' ? (
+                        <div className="flex items-center gap-1.5 bg-emerald-500/90 text-white px-2 py-1 rounded-lg text-[10px] md:text-sm font-semibold">
+                          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full animate-pulse"></span>
+                          SICURO
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 bg-red-500/90 text-white px-2 py-1 rounded-lg text-[10px] md:text-sm font-semibold animate-pulse">
+                            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></span>
+                            ALLERTA MOVIMENTO
+                          </div>
+                          <button
+                            onClick={() => {
+                              setShowTelecamere(false);
+                              setShowIntervieni(true);
+                            }}
+                            className="bg-white text-red-600 px-2 py-1 rounded-lg text-[10px] md:text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer shadow-lg"
+                          >
+                            INTERVIENI
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pulsante per tornare indietro */}
+              <div className="bg-gray-900 p-3 flex justify-center">
+                <button
+                  onClick={() => {
+                    setShowTelecamere(false);
+                    setShowAppMenu(true);
+                  }}
+                  className="px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white transition-all shadow-lg flex items-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Torna al Menu
+                </button>
+              </div>
+            </motion.div>
+          ) : showIntervieni ? (
+            <motion.div
+              key="intervieni"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-gray-900 rounded-t-2xl overflow-hidden"
+            >
+              {/* Immagine singola della camera con allerta */}
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={cameras.find(c => c.status === 'alert')?.image || ''}
+                  alt="Camera con allerta"
+                  fill
+                  className="object-cover brightness-110"
+                />
+                {/* Overlay scuro per effetto telecamera */}
+                <div className="absolute inset-0 bg-black/30"></div>
+
+                {/* Scanline effect */}
+                <div className="absolute inset-0 pointer-events-none opacity-20 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.3)_2px,rgba(0,0,0,0.3)_4px)]"></div>
+
+                {/* Bordo rosso lampeggiante */}
+                <div className="absolute inset-0 border-4 border-red-500 animate-pulse"></div>
+
+                {/* Header con data/ora e nome camera */}
+                <div className="absolute top-0 left-0 right-0 p-3 bg-gradient-to-b from-black/70 to-transparent">
+                  <div className="flex justify-between items-start text-white font-mono">
+                    <div className="bg-black/50 px-2 py-1 rounded">
+                      <div className="text-sm md:text-base">{cameras.find(c => c.status === 'alert')?.name}</div>
+                      <div className="flex items-center gap-1 text-red-500 text-xs md:text-sm mt-0.5">
+                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        REC
+                      </div>
+                    </div>
+                    <div className="text-right bg-black/50 px-2 py-1 rounded">
+                      <div className="text-sm md:text-base">{formatDate(currentTime)}</div>
+                      <div className="text-emerald-400 text-sm md:text-base">{formatTime(currentTime)}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status badge allerta */}
+                <div className="absolute bottom-3 left-3 right-3">
+                  <div className="flex items-center gap-2 bg-red-500/90 text-white px-3 py-2 rounded-lg text-sm md:text-base font-semibold animate-pulse">
+                    <span className="w-2 h-2 bg-white rounded-full"></span>
+                    ALLERTA MOVIMENTO RILEVATO
+                  </div>
+                </div>
+              </div>
+
+              {/* Notifica allarme sonoro */}
+              <AnimatePresence>
+                {showAlarmNotification && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${alarmActive ? 'bg-red-600' : 'bg-emerald-600'} text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3`}
+                  >
+                    <Bell className={`w-8 h-8 ${alarmActive ? 'animate-bounce' : ''}`} />
+                    <span className="text-lg font-bold">{alarmActive ? 'Allarme sonoro attivato!' : 'Allarme sonoro disattivato!'}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Schermata chiamata */}
+              <AnimatePresence>
+                {showCalling && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute inset-0 z-30 bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center p-6"
+                  >
+                    <div className="text-center">
+                      <p className="text-gray-400 text-sm mb-2">Chiamata in corso...</p>
+                      <h2 className="text-white text-4xl md:text-5xl font-bold mb-2">112</h2>
+                      <p className="text-gray-400 text-lg mb-8">Polizia</p>
+
+                      {/* Animazione onde */}
+                      <div className="relative w-20 h-20 mx-auto mb-8">
+                        <div className="absolute inset-0 border-2 border-gray-500 rounded-full animate-ping opacity-30"></div>
+                        <div className="absolute inset-2 border-2 border-gray-400 rounded-full animate-ping opacity-20" style={{ animationDelay: '0.5s' }}></div>
+                        <div className="absolute inset-4 border-2 border-gray-300 rounded-full animate-ping opacity-10" style={{ animationDelay: '1s' }}></div>
+                      </div>
+
+                      <p className="text-gray-400 text-sm mb-8 animate-pulse">Connessione in corso...</p>
+
+                      {/* Pulsante termina */}
+                      <button
+                        onClick={() => setShowCalling(false)}
+                        className="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center mx-auto transition-all shadow-lg cursor-pointer"
+                      >
+                        <Phone className="w-8 h-8 text-white rotate-[135deg]" />
+                      </button>
+                      <p className="text-gray-400 text-sm mt-3">Termina</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Pulsanti azione */}
+              <div className="bg-gray-900 p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => setShowCalling(true)}
+                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg cursor-pointer text-sm md:text-base"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Chiama Polizia
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAlarmActive(!alarmActive);
+                      setShowAlarmNotification(true);
+                      setTimeout(() => {
+                        setShowAlarmNotification(false);
+                      }, 4000);
+                    }}
+                    className={`flex items-center justify-center gap-2 ${alarmActive ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'} text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg cursor-pointer text-sm md:text-base`}
+                  >
+                    <Bell className="w-5 h-5" />
+                    {alarmActive ? 'Disattiva Allarme' : 'Attiva Allarme'}
+                  </button>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowIntervieni(false);
+                    setShowTelecamere(true);
+                  }}
+                  className="w-full px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white transition-all shadow-lg flex items-center justify-center gap-2 text-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Torna alle Telecamere
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="image"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative"
+            >
+              <Image
+                src="/images/secure/princ.png"
+                alt="Sistema di sicurezza"
+                width={800}
+                height={450}
+                quality={100}
+                priority
+                className="w-full h-auto object-contain"
+              />
+
+              {isHero && (
+                <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+                  Offerta fino al 23/12/2025
+                </div>
+              )}
+
+              {/* Pulsante Demo */}
+              <button
+                onClick={() => setShowAppMenu(true)}
+                className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/40 hover:shadow-xl hover:shadow-blue-500/50 transform hover:-translate-y-1 flex items-center justify-center gap-2 text-xs cursor-pointer whitespace-nowrap"
+              >
+                <Camera className="w-4 h-4 flex-shrink-0" />
+                <span>Visualizza DEMO App</span>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="p-6 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800">
