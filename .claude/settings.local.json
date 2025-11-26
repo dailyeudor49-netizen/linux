@@ -4,7 +4,9 @@
       "WebFetch(domain:www.verisure.it)",
       "WebFetch(domain:antifurto.verisure.it)",
       "mcp__ide__getDiagnostics",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

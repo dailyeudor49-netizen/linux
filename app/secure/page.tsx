@@ -151,7 +151,7 @@ const TestimonialsSlider = () => {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="flex flex-col items-center text-center"
+                className="flex flex-col items-center text-center will-change-transform"
               >
                 <Quote className="w-10 h-10 text-blue-600 mb-4 opacity-50" />
                 <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
@@ -254,6 +254,7 @@ const InstallationGuide = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                className="will-change-transform"
               >
                 <button
                   onClick={() => toggleStep(index)}
@@ -314,7 +315,7 @@ const InstallationGuide = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:sticky md:top-8"
+            className="md:sticky md:top-8 will-change-transform"
           >
             {/* Mobile: sempre conf0 */}
             <div className="md:hidden relative h-96 rounded-2xl overflow-hidden shadow-2xl">
@@ -480,8 +481,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gradient-to-b from-blue-600 to-blue-700 rounded-t-2xl overflow-hidden"
+              className="relative bg-gradient-to-b from-blue-600 to-blue-700 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               {/* Header app */}
               <div className="p-4 border-b border-blue-500">
                 <div className="flex items-center justify-between">
@@ -587,8 +589,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               {/* Header */}
               <div className="p-4 border-b border-blue-800">
                 <div className="flex items-center justify-between">
@@ -645,8 +648,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               {/* Header */}
               <div className="p-4 border-b border-blue-800">
                 <div className="flex items-center justify-between">
@@ -718,8 +722,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden"
+              className="relative bg-gradient-to-b from-blue-900 to-blue-950 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               {/* Header */}
               <div className="p-4 border-b border-blue-800">
                 <div className="flex items-center justify-between">
@@ -791,8 +796,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gray-900 rounded-t-2xl overflow-hidden"
+              className="relative bg-gray-900 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               <div className="aspect-[4/3] grid grid-cols-2 grid-rows-2 gap-0.5 p-0.5 bg-gray-800">
                 {cameras.map((camera) => (
                   <div key={camera.id} className="relative overflow-hidden">
@@ -877,8 +883,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-gray-900 rounded-t-2xl overflow-hidden"
+              className="relative bg-gray-900 rounded-t-2xl overflow-hidden border-4 border-yellow-400"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
               {/* Immagine singola della camera con allerta */}
               <div className="relative aspect-[4/3]">
                 <Image
@@ -944,8 +951,9 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 z-30 bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center p-6"
+                    className="absolute inset-0 z-30 bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center p-6 border-4 border-yellow-400"
                   >
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#1a2744] font-bold text-xs px-4 py-1 rounded-b-lg z-10">DEMO</div>
                     <div className="text-center">
                       <p className="text-gray-400 text-sm mb-2">Chiamata in corso...</p>
                       <h2 className="text-white text-4xl md:text-5xl font-bold mb-2">112</h2>
@@ -1039,7 +1047,7 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
               {/* Pulsante Demo */}
               <button
                 onClick={() => setShowAppMenu(true)}
-                className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/40 hover:shadow-xl hover:shadow-blue-500/50 transform hover:-translate-y-1 flex items-center justify-center gap-2 text-xs cursor-pointer whitespace-nowrap"
+                className="absolute bottom-3 left-1/2 -translate-x-1/2 px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-[#1a2744] font-bold rounded-lg transition-all shadow-lg shadow-yellow-400/40 hover:shadow-xl hover:shadow-yellow-400/50 hover:scale-110 flex items-center justify-center gap-2 text-sm cursor-pointer whitespace-nowrap animate-bounce"
               >
                 <Camera className="w-4 h-4 flex-shrink-0" />
                 <span>Visualizza DEMO App</span>
@@ -1059,7 +1067,7 @@ const LeadForm = ({ variant = 'hero' }: { variant?: 'hero' | 'inline' }) => {
         <div className="flex items-center gap-3 mb-2">
           <p className="text-3xl font-extrabold text-white">69,90€</p>
           <p className="text-lg text-blue-200 line-through">233,00€</p>
-          <span className="bg-yellow-400 text-[#1a2744] text-xs font-bold px-2 py-1 rounded">-70%</span>
+          <span className="bg-white text-red-600 border-2 border-red-600 text-xs font-bold px-2 py-1 rounded">-70%</span>
         </div>
         <div className="space-y-1 mb-4">
           <p className="text-blue-100 text-sm flex items-center gap-2">
@@ -1201,7 +1209,7 @@ export default function SecurityLandingPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="order-first lg:order-last"
+              className="order-first lg:order-last will-change-transform"
             >
               <LeadForm variant="hero" />
             </motion.div>
@@ -1211,6 +1219,7 @@ export default function SecurityLandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="will-change-transform"
               >
                 <div className="inline-flex items-center gap-2 bg-yellow-400 text-[#1a2744] px-3 py-1.5 rounded-full text-xs md:text-sm font-bold mb-4 md:mb-6">
                   <Zap className="fill-current" size={14} />
@@ -1316,7 +1325,7 @@ export default function SecurityLandingPage() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: isMobile ? 0.15 : 0.6 }}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.4, ease: "easeOut" }}
-                className="flex flex-col bg-white rounded-xl shadow-lg overflow-hidden"
+                className="flex flex-col bg-white rounded-xl shadow-lg overflow-hidden will-change-transform"
               >
                 <div className="relative w-full">
                   <Image
@@ -1411,17 +1420,18 @@ export default function SecurityLandingPage() {
             ].map((device, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group will-change-transform"
               >
                 <div className="relative aspect-square overflow-hidden">
                   <Image
                     src={device.image}
                     alt={device.title}
                     fill
+                    loading="eager"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -1499,7 +1509,7 @@ export default function SecurityLandingPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex flex-col md:flex-row items-start text-left bg-white rounded-xl p-4 md:gap-4 shadow-md"
+                    className="flex flex-col md:flex-row items-start text-left bg-white rounded-xl p-4 md:gap-4 shadow-md will-change-transform"
                   >
                     <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white mb-3 md:mb-0 flex-shrink-0">
                       {item.icon}
