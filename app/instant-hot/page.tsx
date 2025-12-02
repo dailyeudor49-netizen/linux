@@ -211,6 +211,7 @@ const TestimonialsSlider = () => {
 export default function LandingPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [showSticky, setShowSticky] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const router = useRouter();
 
   const openForm = () => {
@@ -260,6 +261,28 @@ export default function LandingPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Loading screen
+  if (!imageLoaded) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-teal-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-white/20 border-t-yellow-400 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white/60 text-sm">Caricamento...</p>
+        </div>
+        {/* Preload image */}
+        <Image
+          src="/images/instant-hot/hero1.jpg"
+          alt=""
+          width={1}
+          height={1}
+          priority
+          onLoad={() => setImageLoaded(true)}
+          className="opacity-0 absolute"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-blue-600 selection:text-white">
