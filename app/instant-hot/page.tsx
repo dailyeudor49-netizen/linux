@@ -394,71 +394,105 @@ export default function LandingPage() {
 
             {/* Box Ultimi Pezzi + Form - DESKTOP */}
             <div id="order-form" className="mt-4 hidden lg:block">
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden">
-                <div className="px-6 py-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2 text-white font-bold">
-                      <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                      Ultimi 7 pezzi disponibili
-                    </div>
-                    {formOpen && (
-                      <button
-                        onClick={() => setFormOpen(false)}
-                        className="cursor-pointer text-white/60 hover:text-white transition-colors text-sm"
-                      >
-                        Chiudi
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    <span className="text-slate-400 line-through text-lg">€149,00</span>
-                    <span className="text-3xl font-bold text-white">€89,90</span>
-                    <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2 sm:gap-4 text-slate-300 text-sm mb-4">
-                    <span>Pagamento alla consegna</span>
-                    <span className="text-slate-500">•</span>
-                    <span>Spedizione gratuita 24/48h</span>
-                    <span className="text-slate-500">•</span>
-                    <span>30 giorni di reso</span>
-                  </div>
-
+              <motion.div
+                layout
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden"
+              >
+                <AnimatePresence mode="wait">
                   {!formOpen ? (
-                    <button
-                      onClick={openForm}
-                      className="cursor-pointer w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-4 px-6 rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all hover:scale-[1.03] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
+                    <motion.div
+                      key="closed"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="px-6 py-4"
                     >
-                      <span className="flex items-center gap-2 text-xl">Ordina Ora <ArrowRight className="w-5 h-5" /></span>
-                      <span className="text-sm font-medium opacity-80">Paghi alla Consegna</span>
-                    </button>
+                      <div className="flex items-center justify-center gap-2 text-white font-bold mb-3">
+                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        Ultimi 7 pezzi disponibili
+                      </div>
+                      <div className="flex items-center justify-center gap-3 mb-3">
+                        <span className="text-slate-400 line-through text-lg">€149,00</span>
+                        <span className="text-3xl font-bold text-white">€89,90</span>
+                        <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
+                      </div>
+                      <div className="flex items-center justify-center gap-2 sm:gap-4 text-slate-300 text-sm mb-4">
+                        <span>Pagamento alla consegna</span>
+                        <span className="text-slate-500">•</span>
+                        <span>Spedizione gratuita 24/48h</span>
+                        <span className="text-slate-500">•</span>
+                        <span>30 giorni di reso</span>
+                      </div>
+                      <button
+                        onClick={openForm}
+                        className="cursor-pointer w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-4 px-6 rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all hover:scale-[1.03] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
+                      >
+                        <span className="flex items-center gap-2 text-xl">Ordina Ora <ArrowRight className="w-5 h-5" /></span>
+                        <span className="text-sm font-medium opacity-80">Paghi alla Consegna</span>
+                      </button>
+                    </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-1">Nome e Cognome</label>
-                        <input
-                          type="text"
-                          placeholder="Mario Rossi"
-                          required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                        />
+                    <motion.div
+                      key="open"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="px-6 py-4"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2 text-white font-bold">
+                          <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                          Ultimi 7 pezzi disponibili
+                        </div>
+                        <button
+                          onClick={() => setFormOpen(false)}
+                          className="cursor-pointer text-white/60 hover:text-white transition-colors text-sm"
+                        >
+                          Chiudi
+                        </button>
                       </div>
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-1">Numero di Telefono</label>
-                        <input
-                          type="tel"
-                          placeholder="+39 333 1234567"
-                          required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                        />
+                      <div className="flex items-center justify-center gap-3 mb-3">
+                        <span className="text-slate-400 line-through text-lg">€149,00</span>
+                        <span className="text-3xl font-bold text-white">€89,90</span>
+                        <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
                       </div>
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-1">Indirizzo di Spedizione</label>
-                        <input
-                          type="text"
-                          placeholder="Via Roma 1, 00100 Roma"
-                          required
-                          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                        />
+                      <div className="flex items-center justify-center gap-2 sm:gap-4 text-slate-300 text-sm mb-4">
+                        <span>Pagamento alla consegna</span>
+                        <span className="text-slate-500">•</span>
+                        <span>Spedizione gratuita 24/48h</span>
+                        <span className="text-slate-500">•</span>
+                        <span>30 giorni di reso</span>
+                      </div>
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                          <label className="block text-white text-sm font-medium mb-1">Nome e Cognome</label>
+                          <input
+                            type="text"
+                            placeholder="Mario Rossi"
+                            required
+                            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-white text-sm font-medium mb-1">Numero di Telefono</label>
+                          <input
+                            type="tel"
+                            placeholder="+39 333 1234567"
+                            required
+                            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-white text-sm font-medium mb-1">Indirizzo di Spedizione</label>
+                          <input
+                            type="text"
+                            placeholder="Via Roma 1, 00100 Roma"
+                            required
+                            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                          />
                         </div>
                         <button
                           type="submit"
@@ -468,92 +502,128 @@ export default function LandingPage() {
                           <span className="text-sm font-medium opacity-90">Paghi alla Consegna</span>
                         </button>
                       </form>
+                    </motion.div>
                   )}
-                </div>
-              </div>
+                </AnimatePresence>
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Box Ultimi Pezzi + Form - MOBILE (in fondo alla hero) */}
         <div id="order-form-mobile" className="lg:hidden relative z-10 container mx-auto px-4 pb-8">
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden">
-            <div className="px-6 py-4">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-white font-bold">
-                  <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                  Ultimi 7 pezzi disponibili
-                </div>
-                {formOpen && (
-                  <button
-                    onClick={() => setFormOpen(false)}
-                    className="cursor-pointer text-white/60 hover:text-white transition-colors text-sm"
-                  >
-                    Chiudi
-                  </button>
-                )}
-              </div>
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <span className="text-slate-400 line-through text-lg">€149,00</span>
-                <span className="text-3xl font-bold text-white">€89,90</span>
-                <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
-              </div>
-              <div className="flex items-center justify-center gap-2 text-slate-300 text-sm mb-4">
-                <span>Pagamento alla consegna</span>
-                <span className="text-slate-500">•</span>
-                <span>Spedizione gratuita 24/48h</span>
-                <span className="text-slate-500">•</span>
-                <span>30 giorni di reso</span>
-              </div>
-
+          <motion.div
+            layout
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden"
+          >
+            <AnimatePresence mode="wait">
               {!formOpen ? (
-                <button
-                  onClick={openForm}
-                  className="cursor-pointer w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-4 px-6 rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all hover:scale-[1.03] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
+                <motion.div
+                  key="closed"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="px-6 py-4"
                 >
-                  <span className="flex items-center gap-2 text-xl">Ordina Ora <ArrowRight className="w-5 h-5" /></span>
-                  <span className="text-sm font-medium opacity-80">Paghi alla Consegna</span>
-                </button>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
-                  <div>
-                    <label className="block text-white text-sm font-medium mb-1">Nome e Cognome</label>
-                    <input
-                      type="text"
-                      placeholder="Mario Rossi"
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                    />
+                  <div className="flex items-center justify-center gap-2 text-white font-bold mb-3">
+                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    Ultimi 7 pezzi disponibili
                   </div>
-                  <div>
-                    <label className="block text-white text-sm font-medium mb-1">Numero di Telefono</label>
-                    <input
-                      type="tel"
-                      placeholder="+39 333 1234567"
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                    />
+                  <div className="flex items-center justify-center gap-3 mb-3">
+                    <span className="text-slate-400 line-through text-lg">€149,00</span>
+                    <span className="text-3xl font-bold text-white">€89,90</span>
+                    <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
                   </div>
-                  <div>
-                    <label className="block text-white text-sm font-medium mb-1">Indirizzo di Spedizione</label>
-                    <input
-                      type="text"
-                      placeholder="Via Roma 1, 00100 Roma"
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
-                    />
+                  <div className="flex items-center justify-center gap-2 text-slate-300 text-sm mb-4">
+                    <span>Pagamento alla consegna</span>
+                    <span className="text-slate-500">•</span>
+                    <span>Spedizione gratuita 24/48h</span>
+                    <span className="text-slate-500">•</span>
+                    <span>30 giorni di reso</span>
                   </div>
                   <button
-                    type="submit"
-                    className="cursor-pointer w-full bg-gradient-to-r from-green-800 via-green-600 to-emerald-500 hover:from-green-700 hover:via-green-500 hover:to-emerald-400 text-white font-bold py-4 px-6 rounded-xl shadow-[0_0_20px_rgba(22,163,74,0.4)] transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(22,163,74,0.6)] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
+                    onClick={openForm}
+                    className="cursor-pointer w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-4 px-6 rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all hover:scale-[1.03] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
                   >
-                    <span className="flex items-center gap-2 text-xl">Conferma Ordine <ArrowRight className="w-5 h-5" /></span>
-                    <span className="text-sm font-medium opacity-90">Paghi alla Consegna</span>
+                    <span className="flex items-center gap-2 text-xl">Ordina Ora <ArrowRight className="w-5 h-5" /></span>
+                    <span className="text-sm font-medium opacity-80">Paghi alla Consegna</span>
                   </button>
-                </form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="open"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="px-6 py-4"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2 text-white font-bold">
+                      <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                      Ultimi 7 pezzi disponibili
+                    </div>
+                    <button
+                      onClick={() => setFormOpen(false)}
+                      className="cursor-pointer text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Chiudi
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-center gap-3 mb-3">
+                    <span className="text-slate-400 line-through text-lg">€149,00</span>
+                    <span className="text-3xl font-bold text-white">€89,90</span>
+                    <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-40%</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-slate-300 text-sm mb-4">
+                    <span>Pagamento alla consegna</span>
+                    <span className="text-slate-500">•</span>
+                    <span>Spedizione gratuita 24/48h</span>
+                    <span className="text-slate-500">•</span>
+                    <span>30 giorni di reso</span>
+                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-1">Nome e Cognome</label>
+                      <input
+                        type="text"
+                        placeholder="Mario Rossi"
+                        required
+                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-1">Numero di Telefono</label>
+                      <input
+                        type="tel"
+                        placeholder="+39 333 1234567"
+                        required
+                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-1">Indirizzo di Spedizione</label>
+                      <input
+                        type="text"
+                        placeholder="Via Roma 1, 00100 Roma"
+                        required
+                        className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="cursor-pointer w-full bg-gradient-to-r from-green-800 via-green-600 to-emerald-500 hover:from-green-700 hover:via-green-500 hover:to-emerald-400 text-white font-bold py-4 px-6 rounded-xl shadow-[0_0_20px_rgba(22,163,74,0.4)] transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(22,163,74,0.6)] flex flex-col items-center justify-center gap-0 animate-soft-pulse"
+                    >
+                      <span className="flex items-center gap-2 text-xl">Conferma Ordine <ArrowRight className="w-5 h-5" /></span>
+                      <span className="text-sm font-medium opacity-90">Paghi alla Consegna</span>
+                    </button>
+                  </form>
+                </motion.div>
               )}
-            </div>
-          </div>
+            </AnimatePresence>
+          </motion.div>
         </div>
       </header>
 
