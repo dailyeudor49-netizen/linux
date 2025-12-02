@@ -339,7 +339,7 @@ export default function LandingPage() {
             {/* Immagine Hero Prodotto */}
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 aspect-square group">
                 <Image
-                  src="/images/instant-hot/hero1.png"
+                  src="/images/instant-hot/hero1.jpg"
                   alt="HydroLux 3.0 - Rubinetto acqua calda istantanea"
                   fill
                   priority
