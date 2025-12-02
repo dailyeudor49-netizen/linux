@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Zap, Droplets, Thermometer, Wrench, ArrowRight, CheckCircle2, Star, RefreshCw, Leaf, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
@@ -337,7 +338,16 @@ export default function LandingPage() {
           <div className="lg:w-1/2 relative w-full">
             {/* Immagine Hero Prodotto */}
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 aspect-square group">
-                <div className="absolute inset-0 bg-[url('/images/instant-hot/hero1.png')] bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"></div>
+                <Image
+                  src="/images/instant-hot/hero1.png"
+                  alt="HydroLux 3.0 - Rubinetto acqua calda istantanea"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMQYTQWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8AzTxu2WC/lju5YbsQxlmSOTcN3xeeCOlPHZXVjlCpUjklTSlKlsYFiToY7Jn/2Q=="
+                />
                 
                 {/* Overlay Informativi */}
                 <div className="absolute top-3 right-3 lg:top-6 lg:right-6 bg-black/25 backdrop-blur-[2px] text-white p-3 rounded-xl border border-white/10 shadow-lg">
@@ -789,9 +799,9 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button onClick={openForm} className="cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-4 px-6 sm:px-10 lg:px-14 rounded-xl shadow-lg shadow-orange-500/30 transition-all hover:scale-105 flex items-center justify-center gap-2 text-base sm:text-lg lg:text-xl animate-soft-pulse">
+                  <button onClick={openForm} className="cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-bold py-3 sm:py-4 px-8 sm:px-14 md:px-20 lg:px-28 rounded-xl shadow-lg shadow-orange-500/30 transition-all hover:scale-105 flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap animate-soft-pulse">
                     <span>Ordina Ora</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
                   </button>
                 </div>
               </div>
