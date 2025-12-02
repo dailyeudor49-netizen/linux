@@ -439,6 +439,7 @@ export default function LandingPage() {
                           <input
                             type="text"
                             placeholder="Mario Rossi"
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                           />
                         </div>
@@ -447,6 +448,7 @@ export default function LandingPage() {
                           <input
                             type="tel"
                             placeholder="+39 333 1234567"
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                           />
                         </div>
@@ -455,6 +457,7 @@ export default function LandingPage() {
                           <input
                             type="text"
                             placeholder="Via Roma 1, 00100 Roma"
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                           />
                         </div>
@@ -554,6 +557,7 @@ export default function LandingPage() {
                       <input
                         type="text"
                         placeholder="Mario Rossi"
+                        required
                         className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                       />
                     </div>
@@ -562,6 +566,7 @@ export default function LandingPage() {
                       <input
                         type="tel"
                         placeholder="+39 333 1234567"
+                        required
                         className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                       />
                     </div>
@@ -570,6 +575,7 @@ export default function LandingPage() {
                       <input
                         type="text"
                         placeholder="Via Roma 1, 00100 Roma"
+                        required
                         className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-yellow-400 transition-colors"
                       />
                     </div>

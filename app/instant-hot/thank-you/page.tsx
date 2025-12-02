@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Truck, Phone, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Truck, Phone, Clock, ShieldCheck } from 'lucide-react';
 
 export default function ThankYouPage() {
   return (
@@ -160,32 +160,8 @@ export default function ThankYouPage() {
             </div>
           </motion.div>
 
-          {/* Support CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4 }}
-            className="mt-12 text-center"
-          >
-            <p className="text-slate-400 mb-4">Hai domande sul tuo ordine?</p>
-            <a
-              href="tel:+390123456789"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-6 py-3 rounded-xl transition-all cursor-pointer"
-            >
-              <Phone className="w-5 h-5" />
-              <span>Chiamaci: 01onal23 456 789</span>
-            </a>
-          </motion.div>
-
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-8">
-        <div className="container mx-auto px-4 text-center text-slate-500 text-sm">
-          <p>&copy; 2025 HydroLux 3.0 - Tutti i diritti riservati</p>
-        </div>
-      </footer>
 
     </div>
   );
