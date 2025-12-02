@@ -220,19 +220,18 @@ export default function LandingPage() {
     const element = document.getElementById(isMobile ? 'order-form-mobile' : 'order-form');
 
     if (element) {
-      // Calcola la distanza da scrollare
-      const elementRect = element.getBoundingClientRect();
-      const distance = Math.abs(elementRect.top);
-
       // Scrolla al box
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      // Timeout proporzionale alla distanza (minimo 400ms, massimo 1500ms)
-      const timeout = Math.min(Math.max(distance * 0.5, 400), 1500);
+      // Usa IntersectionObserver per aprire il form SOLO quando è visibile
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setFormOpen(true);
+          observer.disconnect();
+        }
+      }, { threshold: 0.8 });
 
-      setTimeout(() => {
-        setFormOpen(true);
-      }, timeout);
+      observer.observe(element);
     } else {
       setFormOpen(true);
     }
